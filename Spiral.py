@@ -1,3 +1,6 @@
+def tail(matrix):
+    for i in matrix:
+        print(i)
 
 def spiral(lenght):
     # if type(n) != int or n<1:
@@ -10,7 +13,7 @@ def spiral(lenght):
     if matrix_side % 2 == 0:
         matrix_side += 1
 
-    matrix = [['0' for x in range(matrix_side)] for y in range(matrix_side)]    #snake matrix building
+    matrix = [[0 for x in range(matrix_side)] for y in range(matrix_side)]    #snake matrix building
 
     x = matrix_side//2                                                          #center
     y = x
@@ -19,35 +22,37 @@ def spiral(lenght):
 
     ops = matrix_side//2
     side = 2
-
-
     for op in range(ops):                                                       #spiral matrix
         x -= 1
         y -= 1
         for leftside in range(side):
-            num+=1
-            y+=1
-            matrix[y][x]=num
+            num += 1
+            y += 1
+            matrix[y][x] = num
+            if num == lenght:
+                tail(matrix)
         for downside in range(side):
-            num+=1
-            x+=1
-            matrix[y][x]=num
+            num += 1
+            x += 1
+            matrix[y][x] = num
+            if num == lenght:
+                tail(matrix)
         for rightside in range(side):
-            num+=1
-            y-=1
-            matrix[y][x]=num
+            num += 1
+            y -= 1
+            matrix[y][x] = num
+            if num == lenght:
+                tail(matrix)
         for upside in range(side):
-            num+=1
-            x-=1
-            matrix[y][x]=num
-        side+=2
+            num += 1
+            x -= 1
+            matrix[y][x] = num
+            if num == lenght:
+                tail(matrix)
+        side += 2
 
     print('matrix side:', matrix_side, 'x:', x, "y:", y, 'ops:', ops)
 
 
-    for i in matrix:
-        print(i)
-
-
-print(spiral(13))
+print(spiral(38))
 
