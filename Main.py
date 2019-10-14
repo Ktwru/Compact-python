@@ -53,6 +53,7 @@ def main():
     t_f = font.render(text[1], 0, (0, 0, 0))
     t_x = font.render(text[2], 0, (0, 0, 0))
     lenghtX = 260
+    python_lenght = 1
 
     pygame.display.update()
     while True:
@@ -61,12 +62,21 @@ def main():
         pos = pygame.mouse.get_pos()
         mos = pygame.mouse.get_pressed()[0]
         window.blit(t_p_l, (15, 30))
-        pygame.draw.rect(window, (0, 0, 0), (270, 43, 550, 5))
+        lenght = pygame.draw.rect(window, (0, 0, 0), (270, 43, 450, 5))
         pygame.draw.rect(window, (255, 255, 255), (lenghtX-10, 33, 20, 20))
-        if pos[0] >= 270 and pos[0] <= 820 and pos[1] >= 35 and pos[1] <= 50:
+        if pos[0] >= lenght.left and pos[0] <= lenght.left + lenght.width and pos[1] >= 5 and pos[1] <= 70:
             if mos:
                 lenghtX = pos[0]
                 pygame.draw.rect(window, (255, 5, 255), (lenghtX-10, 33, 20, 20))
+                python_lenght = lenghtX - lenght.left
+                if python_lenght == 0:
+                    python_lenght = 1
+        pygame.draw.rect(window, (255, 255, 255), (740, 21, 85, 50))
+        pygame.draw.rect(window, (0, 0, 0), (740, 21, 85, 50), 5)
+        num_p_l = font.render(str(python_lenght), 0, (0, 0, 0))
+        window.blit(num_p_l, (760, 30))
+
+
         pygame.draw.rect(window, (255, 255, 255), (700, 100, 125, 50))
         pygame.draw.rect(window, (0, 0, 0), (700, 100, 125, 50), 5)
         if pos[0] >= 700 and pos[0] <= 825 and pos[1] >= 100 and pos[1] <= 150:
