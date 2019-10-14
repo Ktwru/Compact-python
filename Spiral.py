@@ -3,9 +3,6 @@ def tail(matrix):
         print(i)
 
 def spiral(lenght):
-    # if type(n) != int or n<1:
-    #     return []
-
     matrix_side = round(lenght ** 0.5)                                          #snake matrix side calculation
     if matrix_side < lenght ** 0.5:
         matrix_side += 1
@@ -30,29 +27,33 @@ def spiral(lenght):
             y += 1
             matrix[y][x] = num
             if num == lenght:
-                tail(matrix)
+                #tail(matrix)
+                return matrix, matrix_side
         for downside in range(side):
             num += 1
             x += 1
             matrix[y][x] = num
             if num == lenght:
-                tail(matrix)
+                #tail(matrix)
+                return matrix, matrix_side
         for rightside in range(side):
             num += 1
             y -= 1
             matrix[y][x] = num
             if num == lenght:
-                tail(matrix)
+                #tail(matrix)
+                return matrix, matrix_side
         for upside in range(side):
             num += 1
             x -= 1
             matrix[y][x] = num
             if num == lenght:
-                tail(matrix)
+                #tail(matrix)
+                return matrix, matrix_side
         side += 2
 
     print('matrix side:', matrix_side, 'x:', x, "y:", y, 'ops:', ops)
 
 
-print(spiral(38))
+print(spiral(20))
 

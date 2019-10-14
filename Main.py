@@ -45,7 +45,7 @@ pygame.init()
 #         pygame.display.update()
 
 def main():
-    window = pygame.display.set_mode((900, 600))
+    window = pygame.display.set_mode((850, 600))
     window.fill((202, 151, 39))
     text = ['Python length:', 'fold', 'X-ray']
     font = pygame.font.Font('PixelFont.ttf', 36)
