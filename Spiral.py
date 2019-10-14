@@ -3,6 +3,8 @@ def tail(matrix):
         print(i)
 
 def spiral(lenght):
+    if lenght == 1:
+        return [[1]], 1
     matrix_side = round(lenght ** 0.5)                                          #snake matrix side calculation
     if matrix_side < lenght ** 0.5:
         matrix_side += 1
@@ -55,5 +57,5 @@ def spiral(lenght):
     print('matrix side:', matrix_side, 'x:', x, "y:", y, 'ops:', ops)
 
 
-print(spiral(20))
+print(spiral(1))
 

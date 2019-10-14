@@ -1,5 +1,6 @@
 import pygame
 import sys
+import spiral
 
 pygame.init()
 
@@ -47,6 +48,8 @@ pygame.init()
 def main():
     window = pygame.display.set_mode((850, 600))
     window.fill((202, 151, 39))
+    folded_snake = pygame.Surface((500, 500))
+    folded_snake.fill((0, 255, 0))
     text = ['Python length:', 'fold', 'X-ray']
     font = pygame.font.Font('PixelFont.ttf', 36)
     t_p_l = font.render(text[0], 0, (0, 0, 0))
@@ -80,13 +83,34 @@ def main():
         pygame.draw.rect(window, (255, 255, 255), (700, 100, 125, 50))
         pygame.draw.rect(window, (0, 0, 0), (700, 100, 125, 50), 5)
         if pos[0] >= 700 and pos[0] <= 825 and pos[1] >= 100 and pos[1] <= 150:
-                pygame.draw.rect(window, (0, 200, 0), (700, 100, 125, 50), 5)
+            pygame.draw.rect(window, (0, 200, 0), (700, 100, 125, 50), 5)
+            if mos:
+                mat = spiral.spiral(python_lenght)
+                matrix_side = mat[1]
+                matrix = mat[0]
+                part_cords = [0, 0]
+                part_size = 500//matrix_side
+                if matrix_side <= 3:
+                    coef = 1
+                else:
+                    coef = 2
+                part_font_size = coef * (500//matrix_side)//len(str(python_lenght))
+                folded_snake.fill((0, 255, 0))
+                part_font = pygame.font.Font('PixelFont.ttf', part_font_size)
+                for y in range(len(matrix)):
+                    for x in matrix[y]:
+                        folded_snake.blit(part_font.render((str(x)), 0, (0, 0, 0)), (part_cords[0], part_cords[1]))
+                        part_cords[0] += part_size
+                    part_cords[1] += part_size
+                    part_cords[0] = 0
         window.blit(t_f, (730, 110))
         pygame.draw.rect(window, (255, 255, 255), (700, 200, 125, 50))
         pygame.draw.rect(window, (0, 0, 0), (700, 200, 125, 50), 5)
         if pos[0] >= 700 and pos[0] <= 825 and pos[1] >= 200 and pos[1] <= 250:
             pygame.draw.rect(window, (0, 200, 0), (700, 200, 125, 50), 5)
         window.blit(t_x, (720, 210))
+
+        window.blit(folded_snake, (50, 80))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
