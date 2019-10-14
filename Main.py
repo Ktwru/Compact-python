@@ -49,7 +49,7 @@ def main():
     window = pygame.display.set_mode((850, 600))
     window.fill((202, 151, 39))
     folded_snake = pygame.Surface((500, 500))
-    folded_snake.fill((0, 255, 0))
+    folded_snake.fill((202, 151, 39))
     text = ['Python length:', 'fold', 'X-ray']
     font = pygame.font.Font('PixelFont.ttf', 36)
     t_p_l = font.render(text[0], 0, (0, 0, 0))
@@ -57,11 +57,12 @@ def main():
     t_x = font.render(text[2], 0, (0, 0, 0))
     lenghtX = 260
     python_lenght = 1
+    Xray = [(202, 151, 39)]
 
     pygame.display.update()
     while True:
         pygame.time.delay(20)
-        window.fill((202, 151, 39))
+        window.fill(Xray[0])
         pos = pygame.mouse.get_pos()
         mos = pygame.mouse.get_pressed()[0]
         window.blit(t_p_l, (15, 30))
@@ -95,7 +96,7 @@ def main():
                 else:
                     coef = 2
                 part_font_size = coef * (500//matrix_side)//len(str(python_lenght))
-                folded_snake.fill((0, 255, 0))
+                folded_snake.fill((202, 151, 39))
                 part_font = pygame.font.Font('PixelFont.ttf', part_font_size)
                 for y in range(len(matrix)):
                     for x in matrix[y]:
@@ -106,8 +107,13 @@ def main():
         window.blit(t_f, (730, 110))
         pygame.draw.rect(window, (255, 255, 255), (700, 200, 125, 50))
         pygame.draw.rect(window, (0, 0, 0), (700, 200, 125, 50), 5)
-        if pos[0] >= 700 and pos[0] <= 825 and pos[1] >= 200 and pos[1] <= 250:
+        if pos[0] >= 700 and pos[0] <= 825 and pos[1] >= 200 and pos[1] <= 250 or Xray == [(0, 0, 0)]:
             pygame.draw.rect(window, (0, 200, 0), (700, 200, 125, 50), 5)
+            if mos:
+                if Xray == [(202, 151, 39)]:
+                    Xray = [(0, 0, 0)]
+                else:
+                    Xray = [(202, 151, 39)]
         window.blit(t_x, (720, 210))
 
         window.blit(folded_snake, (50, 80))
