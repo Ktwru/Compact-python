@@ -48,13 +48,19 @@ pygame.init()
 def main():
     window = pygame.display.set_mode((850, 600))
     window.fill((202, 151, 39))
-    folded_snake = pygame.Surface((500, 500))
-    folded_snake.fill((202, 151, 39))
+    folded_snake_xray = pygame.Surface((500, 500))
+    folded_snake_pic = pygame.Surface((500, 500))
+    folded_snake_xray.fill((202, 151, 39))
+    folded_snake_pic.fill((202, 151, 39))
     text = ['Python length:', 'fold', 'X-ray']
     font = pygame.font.Font('PixelFont.ttf', 36)
     lenghtX = 260
     python_lenght = 1
     xray = 0
+    part_pic = pygame.image.load('media/part.png')
+    head_pic = pygame.image.load('media/head.png')
+    angle_pic = pygame.image.load('media/angle.png')
+    tail_pic = pygame.image.load('media/tail.png')
 
     pygame.display.update()
     while True:
@@ -104,11 +110,14 @@ def main():
                 else:
                     coef = 2
                 part_font_size = coef * (500//matrix_side)//len(str(python_lenght))
-                folded_snake.fill(colors[0])
+                folded_snake_xray.fill(colors[0])
+                folded_snake_pic.fill(colors[0])
                 part_font = pygame.font.Font('PixelFont.ttf', part_font_size)
+                part_pic_sized = pygame.transform.scale(part_pic, (part_size, part_size))
                 for y in range(len(matrix)):
                     for x in matrix[y]:
-                        folded_snake.blit(part_font.render((str(x)), 0, colors[1]), (part_cords[0], part_cords[1]))
+                        folded_snake_xray.blit(part_font.render((str(x)), 0, colors[1]), (part_cords[0], part_cords[1]))
+                        folded_snake_pic.blit(part_pic_sized, (part_cords[0], part_cords[1]))
                         part_cords[0] += part_size
                     part_cords[1] += part_size
                     part_cords[0] = 0
@@ -130,8 +139,10 @@ def main():
 
         jjj = font.render(str(xray), 0, colors[1])
         window.blit(jjj, (720, 500))
-        window.blit(folded_snake, (50, 80))
-
+        if xray == 1:
+            window.blit(folded_snake_xray, (50, 80))
+        else:
+            window.blit(folded_snake_pic, (50, 80))
         pygame.display.update()
 
 if __name__ == "__main__":
