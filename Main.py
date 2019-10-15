@@ -116,6 +116,14 @@ def main():
                 part_pic_sized = pygame.transform.scale(part_pic, (part_size, part_size))
                 head_pic_sized = pygame.transform.scale(head_pic, (part_size, part_size))
                 tail_pic_sized = pygame.transform.scale(tail_pic, (part_size, part_size))
+                angle_pic_sized = pygame.transform.scale(angle_pic, (part_size, part_size))
+
+                angles = [1, 2, 3]
+                dif = 2
+                while angles[-1] < python_lenght:
+                    for i in range(2):
+                        angles.append(angles[-1] + dif)
+                    dif += 1
 
                 for y in range(len(matrix)):
                     for x in matrix[y]:
@@ -125,8 +133,10 @@ def main():
                         elif x == python_lenght:
                             folded_snake_pic.blit(tail_pic_sized, (part_cords[0], part_cords[1]))
                         elif x in range(2, python_lenght):
-                            folded_snake_pic.blit(part_pic_sized, (part_cords[0], part_cords[1]))
-
+                            if x in angles:
+                                folded_snake_pic.blit(angle_pic_sized, (part_cords[0], part_cords[1]))
+                            else:
+                                folded_snake_pic.blit(part_pic_sized, (part_cords[0], part_cords[1]))
 
                         part_cords[0] += part_size
                     part_cords[1] += part_size
