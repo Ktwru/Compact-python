@@ -1,49 +1,8 @@
 import pygame
-import sys
 import spiral
 
 pygame.init()
 
-
-# def main():
-#     window = pygame.display.set_mode((900, 600))
-#     window.fill((202, 151, 39))
-#     f1 = pygame.font.Font('PixelFont.ttf', 36)
-#
-#     pygame.draw.rect(window, (255, 255, 255), (700, 150, 150, 50))
-#     pygame.draw.rect(window, (0, 0, 0), (700, 150, 150, 50), 5)
-#     text1 = f1.render('Button', 0, (0, 0, 0))
-#     window.blit(text1, (720, 160))
-#
-#     surf = pygame.Surface((50, 50))
-#     surf.fill((255, 0, 0))
-#     rect1 = surf.get_rect()
-#     pos = pygame.mouse.get_pos()
-#     window.blit(surf, rect1)
-#
-#     tom = pygame.image.load('media/Tom.jpg')
-#     window.blit(tom, (300,300))
-#     tomrect = tom.get_rect()
-#     ang = 0
-#
-#     pygame.display.update()
-#     pressed = pygame.mouse.get_pressed()
-#     while True:
-#         pygame.time.delay(20)
-#         window.fill((0, 0, 0))
-#         for i in pygame.event.get():
-#             if i.type == pygame.QUIT:
-#                 return
-#             if i.type == pygame.MOUSEBUTTONDOWN and i.button == 1:
-#                 window.blit(f1.render('click', 0, (0,0,0)), (i.pos[0]-20, i.pos[1]-10))
-#             if pygame.mouse.get_focused():
-#                 pos = pygame.mouse.get_pos()
-#                 pygame.draw.circle(window, (0,0,0), pos, 5)
-#         rect1.x += 1
-#         window.blit(surf, rect1)
-#
-#
-#         pygame.display.update()
 
 def main():
     window = pygame.display.set_mode((850, 600))
