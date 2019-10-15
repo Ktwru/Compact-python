@@ -114,10 +114,20 @@ def main():
                 folded_snake_pic.fill(colors[0])
                 part_font = pygame.font.Font('PixelFont.ttf', part_font_size)
                 part_pic_sized = pygame.transform.scale(part_pic, (part_size, part_size))
+                head_pic_sized = pygame.transform.scale(head_pic, (part_size, part_size))
+                tail_pic_sized = pygame.transform.scale(tail_pic, (part_size, part_size))
+
                 for y in range(len(matrix)):
                     for x in matrix[y]:
                         folded_snake_xray.blit(part_font.render((str(x)), 0, colors[1]), (part_cords[0], part_cords[1]))
-                        folded_snake_pic.blit(part_pic_sized, (part_cords[0], part_cords[1]))
+                        if x == 1:
+                            folded_snake_pic.blit(head_pic_sized, (part_cords[0], part_cords[1]))
+                        elif x == python_lenght:
+                            folded_snake_pic.blit(tail_pic_sized, (part_cords[0], part_cords[1]))
+                        elif x in range(2, python_lenght):
+                            folded_snake_pic.blit(part_pic_sized, (part_cords[0], part_cords[1]))
+
+
                         part_cords[0] += part_size
                     part_cords[1] += part_size
                     part_cords[0] = 0
