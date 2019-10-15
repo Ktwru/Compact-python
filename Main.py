@@ -110,8 +110,8 @@ def main():
                 else:
                     coef = 2
                 part_font_size = coef * (500//matrix_side)//len(str(python_lenght))
-                folded_snake_xray.fill(colors[0])
-                folded_snake_pic.fill(colors[0])
+                folded_snake_xray.fill((0, 0, 0))
+                folded_snake_pic.fill((202, 151, 39))
                 part_font = pygame.font.Font('PixelFont.ttf', part_font_size)
                 part_pic_sized = pygame.transform.scale(part_pic, (part_size, part_size))
                 head_pic_sized = pygame.transform.scale(head_pic, (part_size, part_size))
@@ -119,7 +119,7 @@ def main():
                 angle_pic_sized = pygame.transform.scale(angle_pic, (part_size, part_size))
                 rot = 0
 
-                angles = [ 2, 3]
+                angles = [2, 3]
                 dif = 2
                 while angles[-1] < python_lenght:
                     for i in range(2):
@@ -128,7 +128,7 @@ def main():
 
                 for y in range(len(matrix)):
                     for x in matrix[y]:
-                        folded_snake_xray.blit(part_font.render((str(x)), 0, colors[1]), (part_cords[0], part_cords[1]))
+                        folded_snake_xray.blit(part_font.render((str(x)), 0, (255, 255, 255)), (part_cords[0], part_cords[1]))
                         if x == 1:
                             folded_snake_pic.blit(head_pic_sized, (part_cords[0], part_cords[1]))
                         elif x == python_lenght:
@@ -175,9 +175,6 @@ def main():
             pygame.draw.rect(window, (0, 200, 0), (700, 200, 125, 50), 5)
         t_x = font.render(text[2], 0, colors[1])
         window.blit(t_x, (720, 210))
-
-        jjj = font.render(str(xray), 0, colors[1])
-        window.blit(jjj, (720, 500))
         if xray == 1:
             window.blit(folded_snake_xray, (50, 80))
         else:
