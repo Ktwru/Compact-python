@@ -117,8 +117,9 @@ def main():
                 head_pic_sized = pygame.transform.scale(head_pic, (part_size, part_size))
                 tail_pic_sized = pygame.transform.scale(tail_pic, (part_size, part_size))
                 angle_pic_sized = pygame.transform.scale(angle_pic, (part_size, part_size))
+                rot = 0
 
-                angles = [1, 2, 3]
+                angles = [ 2, 3]
                 dif = 2
                 while angles[-1] < python_lenght:
                     for i in range(2):
@@ -131,14 +132,32 @@ def main():
                         if x == 1:
                             folded_snake_pic.blit(head_pic_sized, (part_cords[0], part_cords[1]))
                         elif x == python_lenght:
+                            if y == matrix_side-1 and matrix[y].index(x) != 0:
+                                tail_pic_sized = pygame.transform.rotate(tail_pic_sized, 180)
+                                print(1)
+                            elif matrix[y].index(x) == matrix_side-1 and y != matrix_side-1:
+                                tail_pic_sized = pygame.transform.rotate(tail_pic_sized, 270)
+                                print(2)
+                            elif matrix[y].index(x) == 0 and y > 1 :
+                                tail_pic_sized = pygame.transform.rotate(tail_pic_sized, 90)
+                                print(3, x, y)
+
                             folded_snake_pic.blit(tail_pic_sized, (part_cords[0], part_cords[1]))
                         elif x in range(2, python_lenght):
                             if x in angles:
-                                folded_snake_pic.blit(angle_pic_sized, (part_cords[0], part_cords[1]))
+                                angle_pic_sized_rotated = pygame.transform.rotate(angle_pic_sized, angles.index(x)*90)
+                                folded_snake_pic.blit(angle_pic_sized_rotated, (part_cords[0], part_cords[1]))
                             else:
-                                folded_snake_pic.blit(part_pic_sized, (part_cords[0], part_cords[1]))
-
+                                if x in matrix[y][rot:matrix_side-rot]:
+                                    part_pic_sized_rotated = part_pic_sized
+                                else:
+                                    part_pic_sized_rotated = pygame.transform.rotate(part_pic_sized, 90)
+                                folded_snake_pic.blit(part_pic_sized_rotated, (part_cords[0], part_cords[1]))
                         part_cords[0] += part_size
+                    if y < matrix_side//2:
+                        rot += 1
+                    else:
+                        rot -= 1
                     part_cords[1] += part_size
                     part_cords[0] = 0
         t_f = font.render(text[1], 0, colors[1])
